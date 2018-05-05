@@ -1,0 +1,54 @@
+ {
+     "data": [{
+             "itemId": "2acf4ac1-4000-4766-91ac-3a0ab47a811c",
+             "value": "100.00",
+             "currency": "CAD",
+             "title": "Item 1",
+             "description": {
+                 "en-CA": "Lorem ipsum dolor sit amet, consectetur adipiscing elit (EN).",
+                 "fr-CA": "Lorem ipsum dolor sit amet, consectetur adipiscing elit (FR)."
+             }
+
+         },
+         {
+             "itemId": "1c2ddcaa-383a-4cc3-a492-9f71c4056076",
+             "value": "125.00",
+             "currency": "USD",
+             "title": "Item 2",
+             "description": {
+                 "en-CA": "Nullam condimentum, magna eu bibendum faucibus, diam augue commodo est, vitae dictum lorem risus eu nulla (EN).",
+                 "fr-CA": "Nullam condimentum, magna eu bibendum faucibus, diam augue commodo est, vitae dictum lorem risus eu nulla (FR)."
+             }
+         },
+         {
+             "itemId": "83bcc85f-423b-4161-b656-dc7bb53a7127",
+             "value": "999.99",
+             "currency": "CAD",
+             "title": "Item 3",
+             "description": {
+                 "en-CA": "Fusce ac euismod dolor, at suscipit mauris. Suspendisse potenti (EN).",
+                 "fr-CA": "Fusce ac euismod dolor, at suscipit mauris. Suspendisse potenti (FR)."
+             }
+         },
+         {
+             "itemId": "e5a1986d-5418-46ae-bab7-7a4ef0e1aa69",
+             "value": "72.23",
+             "currency": "USD",
+             "title": "Item 4",
+             "description": {
+                 "en-CA": "Vestibulum iaculis risus eget risus porttitor, sit amet rhoncus odio tincidunt (EN).",
+                 "fr-CA": "Vestibulum iaculis risus eget risus porttitor, sit amet rhoncus odio tincidunt (FR)."
+             }
+         },
+         {
+             "itemId": "a64593fe-29e3-468d-bfc9-30488c731d6a",
+             "value": "123.45",
+             "currency": "CAD",
+             "title": "Item 5",
+             "description": {
+                 "en-CA": "Donec vitae hendrerit leo. Integer pretium pharetra orci, sed luctus risus dictum et (EN).",
+                 "fr-CA": "Donec vitae hendrerit leo. Integer pretium pharetra orci, sed luctus risus dictum et (FR)."
+             }
+         }
+     ]
+ }
