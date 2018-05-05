@@ -13,4 +13,4 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RUNTIME)
-public @interface UserScope {}
+public @interface ItemsScope {}

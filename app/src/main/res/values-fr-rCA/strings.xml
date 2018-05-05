@@ -1,0 +1,7 @@
+<resources>
+    <string name="items">Produits</string>
+    <string name="navigation_drawer_open">Ouvrir le paneau de navigation</string>
+    <string name="navigation_drawer_close">Fermer le paneau de navigation</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="hello_message">Ceci est une démo pour une candidature IBM.</string>
+</resources>

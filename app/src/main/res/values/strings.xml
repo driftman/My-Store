@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">My Store</string>
-
+    <string name="app_name" translatable="false">My Store</string>
+    <string name="items">Items</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="hello_message">This is a demo app for an IBM job application.</string>
+    <string name="author" translatable="false">by Soufiane ELBAZ</string>
+    <string name="title_activity_item">ItemActivity</string>
 </resources>

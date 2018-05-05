@@ -1,15 +1,12 @@
 package com.ibm.mystore.di.component;
 
-import android.content.Context;
-
-import com.elbaz.mydaggerapplication.di.module.ApplicationModule;
-import com.elbaz.mydaggerapplication.di.module.NetworkModule;
-import com.elbaz.mydaggerapplication.di.module.UserModule;
+import com.ibm.mystore.di.module.ApplicationModule;
+import com.ibm.mystore.di.module.ItemModule;
+import com.ibm.mystore.di.module.NetworkModule;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import retrofit2.Retrofit;
 
 /**
  * Created by abk on 31/03/2018.
@@ -19,5 +16,6 @@ import retrofit2.Retrofit;
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
 
-    UserComponent plusUserComponent(UserModule userModule);
+    ItemComponent plusItemCompoment(ItemModule itemModule);
+
 }

@@ -16,6 +16,24 @@ public class Description implements Parcelable {
     @SerializedName("fr-CA")
     private String frCA;
 
+    public Description() {
+    }
+
+    public String getEnCA() {
+        return enCA;
+    }
+
+    public void setEnCA(String enCA) {
+        this.enCA = enCA;
+    }
+
+    public String getFrCA() {
+        return frCA;
+    }
+
+    public void setFrCA(String frCA) {
+        this.frCA = frCA;
+    }
 
     protected Description(Parcel in) {
         enCA = in.readString();
