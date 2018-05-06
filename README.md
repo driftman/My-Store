@@ -12,7 +12,7 @@ Main activity - French version :
 ![alt text][main_activity_fr]
 Items list - one panel - French version :
 ![alt text][items_list_one_panel_fr]
-tem details - one panel - French version :
+Item details - one panel - French version :
 ![alt text][item_details_one_panel_fr]
 
 [main_activity_en]: https://github.com/driftman/My-Store/blob/master/screenshots/Screenshot_1525630570.png "Main activity - English version"
