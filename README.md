@@ -1,11 +1,18 @@
-Reference-style: 
+Main activity - English version : 
 ![alt text][main_activity_en]
+Main activity - Drawer - English version : 
 ![alt text][main_activity_drawer_en]
+Items list - one panel - English version :
 ![alt text][items_list_one_panel_en]
+Item details - one panel - English version :
 ![alt text][item_details_one_panel_en]
+Items list + details - two panels - English version : 
 ![alt text][items_list_detail_two_panels_en]
+Main activity - French version :
 ![alt text][main_activity_fr]
+Items list - one panel - French version :
 ![alt text][items_list_one_panel_fr]
+tem details - one panel - French version :
 ![alt text][item_details_one_panel_fr]
 
 [main_activity_en]: https://github.com/driftman/My-Store/blob/master/screenshots/Screenshot_1525630570.png "Main activity - English version"
