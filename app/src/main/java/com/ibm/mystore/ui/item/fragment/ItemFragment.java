@@ -1,4 +1,4 @@
-package com.ibm.mystore.ui.item;
+package com.ibm.mystore.ui.item.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,29 +1,64 @@
 package com.ibm.mystore.ui.item;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.ibm.mystore.MainApplication;
 import com.ibm.mystore.R;
 import com.ibm.mystore.data.network.model.Description;
 import com.ibm.mystore.data.network.model.Item;
+import com.ibm.mystore.di.component.ItemComponent;
 import com.ibm.mystore.ui.base.BaseActivity;
+import com.ibm.mystore.ui.item.fragment.ItemFragment;
+import com.ibm.mystore.ui.item.fragment.ItemsFragment;
 import com.ibm.mystore.ui.item.listener.OnItemSelectedListener;
 
 import java.util.List;
 
-public class ItemsActivity extends BaseActivity implements
-        ItemContract.IItemView,
-        OnItemSelectedListener {
+
+public class ItemsActivity extends BaseActivity implements OnItemSelectedListener {
+
+    public static final String TAG = "ItemsActivity";
+
+    private ItemComponent itemComponent;
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Setting toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        initializeActivity(savedInstanceState);
+        initializeInjector();
+    }
+
+    /**
+     * Initializes injector
+     */
+    private void initializeInjector() {
+        itemComponent = ((MainApplication) getApplication())
+                .plusItemComponent();
+    }
+
+    /**
+     * Provides an ItemComponent
+     * @return ItemComponent
+     */
+    public ItemComponent getItemComponent() {
+        return itemComponent;
+    }
+
+
+    /**
+     * Initializes this activity.
+     */
+    private void initializeActivity(Bundle savedInstanceState) {
         if(savedInstanceState == null) {
             addItemsFragment();
             if(isLandscapeOrTablet()) {
@@ -90,15 +125,13 @@ public class ItemsActivity extends BaseActivity implements
     }
 
 
-    // This method will help determine whether the phone is on landscape mode or it is a tablet
-    // device
+    /**
+     * This method will help determine whether the phone is on landscape mode or it is a tablet
+     * device
+     * @return
+     */
     private Boolean isLandscapeOrTablet() {
         View view = findViewById(R.id.fragment_item);
         return view != null;
-    }
-
-    @Override
-    public void setItems(List<Item> items) {
-
     }
 }

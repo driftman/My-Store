@@ -13,7 +13,10 @@ import com.ibm.mystore.ui.item.listener.OnItemSelectedListener;
 
 import org.w3c.dom.Text;
 
+import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by Soufiane ELBAZ on 05/05/2018.
@@ -24,12 +27,21 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
     private Context context;
     private List<Item> items;
-    private final OnItemSelectedListener listener;
+    private OnItemSelectedListener listener;
 
-    public ItemsAdapter(Context context, List<Item> items, OnItemSelectedListener listener) {
+    @Inject
+    public ItemsAdapter(Context context) {
         this.context = context;
-        this.items = items;
+        this.items = Collections.emptyList();
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener listener) {
         this.listener = listener;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -43,7 +55,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemSelected(null, position);
+                if(listener != null) listener.onItemSelected(null, position);
             }
         });
     }

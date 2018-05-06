@@ -1,4 +1,4 @@
-package com.ibm.mystore.ui.item;
+package com.ibm.mystore.ui.item.fragment;
 
 import com.ibm.mystore.data.network.ItemService;
 import com.ibm.mystore.data.network.response.ItemsResponse;
@@ -12,7 +12,7 @@ import rx.schedulers.Schedulers;
  * Created by Soufiane ELBAZ on 05/05/2018.
  */
 
-public class ItemPresenter<V extends ItemContract.IItemView> implements ItemContract.IItemPresenter<V> {
+public class ItemsPresenter<V extends ItemsContract.IItemsView> implements ItemsContract.IItemsPresenter<V> {
 
     private ItemService service;
 
@@ -20,7 +20,7 @@ public class ItemPresenter<V extends ItemContract.IItemView> implements ItemCont
 
     private V view;
 
-    public ItemPresenter(ItemService service) {
+    public ItemsPresenter(ItemService service) {
         this.service = service;
     }
 
