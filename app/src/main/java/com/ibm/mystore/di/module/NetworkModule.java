@@ -1,5 +1,7 @@
 package com.ibm.mystore.di.module;
 
+import com.ibm.mystore.data.network.MyStoreInterceptor;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -33,26 +35,11 @@ public class NetworkModule {
         return "https://ws.ibm.com/";
     }
 
-    @Provides @Singleton Interceptor provideInterceptor() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                // Customize the request
-                Request request = original.newBuilder()
-                        .header("Content-Type", "application/json")
-                        .removeHeader("Pragma")
-                        .header("Cache-Control", String.format("max-age=%d", 10000))
-                        .build();
-                okhttp3.Response response = chain.proceed(request);
-                response.cacheResponse();
-                // Customize or return the response
-                return response;
-            }
-        };
+    @Provides @Singleton MyStoreInterceptor provideInterceptor() {
+        return new MyStoreInterceptor();
     }
 
-    @Provides @Singleton OkHttpClient provideOkHttpClient(Interceptor interceptor) {
+    @Provides @Singleton OkHttpClient provideOkHttpClient(MyStoreInterceptor interceptor) {
         return new OkHttpClient.Builder()
                 .cache(cache)
                 .addInterceptor(interceptor)

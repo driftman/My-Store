@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".ui.item.ItemsActivity"
-            android:label="@string/title_activity_item"
+            android:label="@string/items"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

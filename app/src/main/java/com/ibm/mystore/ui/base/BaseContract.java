@@ -8,7 +8,7 @@ public class BaseContract {
 
     public interface IMvpView {
 
-        void showMessage(String msg);
+        void showMessage(int resourceId);
 
     }
 

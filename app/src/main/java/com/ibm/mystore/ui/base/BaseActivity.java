@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.ibm.mystore.R;
+
 
 /**
  * Created by Soufiane ELBAZ on 05/05/2018.
@@ -20,8 +22,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
     }
 
     @Override
-    public void showMessage(String msg) {
-        showToast(msg);
+    public void showMessage(int resourceId) {
+        showToast(getString(resourceId));
     }
 
     private void showToast(String msg) {

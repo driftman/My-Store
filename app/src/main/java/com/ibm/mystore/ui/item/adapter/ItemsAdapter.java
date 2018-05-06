@@ -52,17 +52,20 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
     @Override
     public void onBindViewHolder(ItemsViewHolder holder, final int position) {
+        final Item item = items.get(position);
+        holder.title.setText(item.getTitle());
+        holder.price.setText(context.getString(R.string.price_tag, item.getValue(), item.getCurrency()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(listener != null) listener.onItemSelected(null, position);
+                if(listener != null) listener.onItemSelected(item, position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return items.size();
     }
 
     class ItemsViewHolder extends RecyclerView.ViewHolder {
@@ -72,8 +75,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
         public ItemsViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
-            price = (TextView) itemView.findViewById(R.id.price);
+            title = (TextView) itemView.findViewById(R.id.item_title);
+            price = (TextView) itemView.findViewById(R.id.item_price);
         }
     }
 }

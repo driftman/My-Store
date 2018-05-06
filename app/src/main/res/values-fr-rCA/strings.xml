@@ -3,5 +3,7 @@
     <string name="navigation_drawer_open">Ouvrir le paneau de navigation</string>
     <string name="navigation_drawer_close">Fermer le paneau de navigation</string>
     <string name="action_settings">Paramètres</string>
+    <string name="action_language">Langue</string>
     <string name="hello_message">Ceci est une démo pour une candidature IBM.</string>
+    <string name="network_error">Une erreur est survenue lors de l\'appel au WS.</string>
 </resources>

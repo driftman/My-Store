@@ -19,6 +19,7 @@ public class ItemsResponse implements Parcelable {
 
 
     protected ItemsResponse(Parcel in) {
+        data = in.createTypedArrayList(Item.CREATOR);
     }
 
     public static final Creator<ItemsResponse> CREATOR = new Creator<ItemsResponse>() {
@@ -33,6 +34,10 @@ public class ItemsResponse implements Parcelable {
         }
     };
 
+    public List<Item> getData() {
+        return data;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -40,5 +45,6 @@ public class ItemsResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeTypedList(data);
     }
 }

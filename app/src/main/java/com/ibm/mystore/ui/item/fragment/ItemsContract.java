@@ -17,6 +17,8 @@ public class ItemsContract {
     }
 
     public interface IItemsView extends BaseContract.IMvpView {
+        void showLoading();
+        void hideLoading();
         void setItems(List<Item> items);
     }
 

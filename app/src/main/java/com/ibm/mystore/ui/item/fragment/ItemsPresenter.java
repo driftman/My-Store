@@ -1,5 +1,6 @@
 package com.ibm.mystore.ui.item.fragment;
 
+import com.ibm.mystore.R;
 import com.ibm.mystore.data.network.ItemService;
 import com.ibm.mystore.data.network.response.ItemsResponse;
 
@@ -43,20 +44,20 @@ public class ItemsPresenter<V extends ItemsContract.IItemsView> implements Items
 
                     @Override
                     public void onCompleted() {
-                        //
+                        // completed ...
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showMessage("Error : " + e.getMessage());
+                        view.showMessage(R.string.network_error);
                     }
 
                     @Override
                     public void onNext(ItemsResponse itemsResponse) {
-                        if(itemsResponse != null) {
-
+                        if(itemsResponse != null && itemsResponse.getData() != null) {
+                            view.setItems(itemsResponse.getData());
                         } else {
-
+                            view.showMessage(R.string.network_error);
                         }
                     }
 

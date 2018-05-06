@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ibm.mystore.MainApplication;
@@ -40,6 +41,7 @@ public class ItemsFragment extends Fragment implements
     private OnItemSelectedListener listener;
     private RecyclerView recyclerView;
     private LinearLayoutManager llm;
+    private RelativeLayout loading;
 
     @Override
     public void onAttach(Context context) {
@@ -88,6 +90,9 @@ public class ItemsFragment extends Fragment implements
      * @param view
      */
     private void initializeViews(View view) {
+        // Setting the loading layout
+        loading = (RelativeLayout) view.findViewById(R.id.loading);
+        showLoading();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_items);
         // Setting a vertical layout manager
         llm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -98,13 +103,24 @@ public class ItemsFragment extends Fragment implements
     }
 
     @Override
-    public void showMessage(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    public void showMessage(int resourceId) {
+        Toast.makeText(getContext(), getString(resourceId), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading() {
+        loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        loading.setVisibility(View.GONE);
     }
 
     @Override
     public void setItems(List<Item> items) {
         adapter.setItems(items);
+        hideLoading();
     }
 
     @Override
