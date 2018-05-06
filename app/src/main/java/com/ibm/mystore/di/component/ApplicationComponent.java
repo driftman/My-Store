@@ -16,6 +16,6 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
 
-    ItemComponent plusItemCompoment(ItemModule itemModule);
+    ItemComponent plusItemComponent(ItemModule itemModule);
 
 }

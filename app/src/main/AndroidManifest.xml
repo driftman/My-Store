@@ -22,7 +22,7 @@
         <activity
             android:name=".ui.item.ItemsActivity"
             android:label="@string/title_activity_item"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

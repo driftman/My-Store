@@ -7,4 +7,5 @@
     <string name="hello_message">This is a demo app for an IBM job application.</string>
     <string name="author" translatable="false">by Soufiane ELBAZ</string>
     <string name="title_activity_item">ItemActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
