@@ -1,5 +1,7 @@
 package com.ibm.mystore.di.module;
 
+import android.content.Context;
+
 import com.ibm.mystore.data.network.MyStoreInterceptor;
 
 import java.io.File;
@@ -35,8 +37,8 @@ public class NetworkModule {
         return "https://ws.ibm.com/";
     }
 
-    @Provides @Singleton MyStoreInterceptor provideInterceptor() {
-        return new MyStoreInterceptor();
+    @Provides @Singleton MyStoreInterceptor provideInterceptor(Context context) {
+        return new MyStoreInterceptor(context);
     }
 
     @Provides @Singleton OkHttpClient provideOkHttpClient(MyStoreInterceptor interceptor) {

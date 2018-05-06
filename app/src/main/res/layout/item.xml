@@ -11,7 +11,7 @@
         android:layout_margin="@dimen/image_margin"
         android:id="@+id/image"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/lightBlue"/>
+        android:src="@mipmap/ic_launcher_round"/>
 
     <LinearLayout
         android:id="@+id/info_container"
@@ -24,12 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/item_title"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_subtitle"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/item_price"
+            android:textColor="@color/lightBlue"
             android:textSize="@dimen/text_caption"
             android:textStyle="italic"/>
     </LinearLayout>

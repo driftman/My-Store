@@ -13,6 +13,7 @@ import com.ibm.mystore.ui.item.listener.OnItemSelectedListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,22 +27,28 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
 
 
     private Context context;
-    private List<Item> items;
+    private ArrayList<Item> items;
     private OnItemSelectedListener listener;
 
     @Inject
     public ItemsAdapter(Context context) {
         this.context = context;
-        this.items = Collections.emptyList();
+        this.items = new ArrayList<>();
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
         this.listener = listener;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
         notifyDataSetChanged();
+        listener.displayFirstItemForLandscapeAndLargeDevice(this.items.get(0));
+    }
+
+    public ArrayList<Item> getItems() {
+        if(items.size() > 0) return items;
+        else return null;
     }
 
     @Override
@@ -58,7 +65,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(listener != null) listener.onItemSelected(item, position);
+                if(listener != null) listener.onItemSelected(item);
             }
         });
     }

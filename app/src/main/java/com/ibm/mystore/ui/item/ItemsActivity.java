@@ -1,22 +1,21 @@
 package com.ibm.mystore.ui.item;
 
-import android.app.Application;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ibm.mystore.MainApplication;
 import com.ibm.mystore.R;
-import com.ibm.mystore.data.network.model.Description;
 import com.ibm.mystore.data.network.model.Item;
 import com.ibm.mystore.di.component.ItemComponent;
 import com.ibm.mystore.ui.base.BaseActivity;
 import com.ibm.mystore.ui.item.fragment.ItemFragment;
 import com.ibm.mystore.ui.item.fragment.ItemsFragment;
 import com.ibm.mystore.ui.item.listener.OnItemSelectedListener;
-
-import java.util.List;
 
 
 public class ItemsActivity extends BaseActivity implements OnItemSelectedListener {
@@ -27,15 +26,39 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
 
     private Toolbar toolbar;
 
+    private Bundle savedInstanceState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+        // Setting the saved instance state
+        this.savedInstanceState = savedInstanceState;
         // Setting toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initializeActivity(savedInstanceState);
         initializeInjector();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     /**
@@ -59,12 +82,21 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
      * Initializes this activity.
      */
     private void initializeActivity(Bundle savedInstanceState) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         if(savedInstanceState == null) {
             addItemsFragment();
-            if(isLandscapeOrTablet()) {
-                addItemFragment();
+            if(isLandscapeOrLargeDevice()) {
+                addItemFragment(null);
+            }
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_items);
+            if(fragment instanceof ItemFragment) {
+                fragmentManager.popBackStack();
             }
         }
+
     }
 
     private void addItemsFragment() {
@@ -74,23 +106,12 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
         transaction.commit();
     }
 
-    private void addItemFragment() {
-
+    private void addItemFragment(Item item) {
         ItemFragment itemFragment = new ItemFragment();
-
-        Description description = new Description();
-        description.setEnCA("Fusce ac euismod dolor, at suscipit mauris. Suspendisse potenti (EN).");
-        description.setFrCA("Fusce ac euismod dolor, at suscipit mauris. Suspendisse potenti (FR).");
-
-        Item item = new Item();
-        item.setId("1");
-        item.setTitle("Item 1");
-        item.setDescription(description);
-
-        Bundle args = getBundledItem(item);
-
-        itemFragment.setArguments(args);
-
+        if(item != null) {
+            Bundle args = getBundledItem(item);
+            itemFragment.setArguments(args);
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_item, itemFragment);
         transaction.commit();
@@ -110,7 +131,7 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
         itemFragment.setArguments(args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // Check whether we should replace the main or the item container
-        if(isLandscapeOrTablet()) {
+        if(isLandscapeOrLargeDevice()) {
             transaction.replace(R.id.fragment_item, itemFragment);
         } else {
             transaction.replace(R.id.fragment_items, itemFragment);
@@ -120,8 +141,15 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
     }
 
     @Override
-    public void onItemSelected(Item item, int position) {
+    public void onItemSelected(Item item) {
         replaceItemFragment(item);
+    }
+
+    @Override
+    public void displayFirstItemForLandscapeAndLargeDevice(Item item) {
+        if(isLandscapeOrLargeDevice()) {
+            onItemSelected(item);
+        }
     }
 
 
@@ -130,8 +158,13 @@ public class ItemsActivity extends BaseActivity implements OnItemSelectedListene
      * device
      * @return
      */
-    private Boolean isLandscapeOrTablet() {
+    private Boolean isLandscapeOrLargeDevice() {
         View view = findViewById(R.id.fragment_item);
         return view != null;
+    }
+
+    @Override
+    public Bundle getSavedInstanceState() {
+        return savedInstanceState;
     }
 }

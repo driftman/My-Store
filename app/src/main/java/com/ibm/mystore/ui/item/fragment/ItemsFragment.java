@@ -2,6 +2,7 @@ package com.ibm.mystore.ui.item.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.ibm.mystore.ui.item.ItemsActivity;
 import com.ibm.mystore.ui.item.adapter.ItemsAdapter;
 import com.ibm.mystore.ui.item.listener.OnItemSelectedListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,6 +33,7 @@ public class ItemsFragment extends Fragment implements
         ItemsContract.IItemsView {
 
     public static String TAG = "ItemsFragment";
+    public static final String ITEMS = "ITEMS";
 
     @Inject
     public ItemsContract.IItemsPresenter presenter;
@@ -42,6 +45,8 @@ public class ItemsFragment extends Fragment implements
     private RecyclerView recyclerView;
     private LinearLayoutManager llm;
     private RelativeLayout loading;
+
+    private Bundle savedInstanceState;
 
     @Override
     public void onAttach(Context context) {
@@ -59,6 +64,15 @@ public class ItemsFragment extends Fragment implements
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(adapter != null) {
+            final ArrayList<Item> items = adapter.getItems();
+            if(items != null) outState.putParcelableArrayList(ITEMS, items);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +87,8 @@ public class ItemsFragment extends Fragment implements
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Setting the saved instance state
+        this.savedInstanceState = savedInstanceState;
         presenter.onViewInitialized();
     }
 
@@ -108,6 +124,11 @@ public class ItemsFragment extends Fragment implements
     }
 
     @Override
+    public Bundle getSavedInstanceState() {
+        return savedInstanceState;
+    }
+
+    @Override
     public void showLoading() {
         loading.setVisibility(View.VISIBLE);
     }
@@ -118,7 +139,7 @@ public class ItemsFragment extends Fragment implements
     }
 
     @Override
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         adapter.setItems(items);
         hideLoading();
     }
@@ -128,4 +149,13 @@ public class ItemsFragment extends Fragment implements
         super.onDestroy();
         presenter.onDetach();
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        presenter = null;
+        listener = null;
+    }
+
+
 }

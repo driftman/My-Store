@@ -11,7 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ibm.mystore.R;
+import com.ibm.mystore.data.network.model.Description;
 import com.ibm.mystore.data.network.model.Item;
+
+import java.util.Locale;
 
 /**
  * Created by abk on 05/05/2018.
@@ -31,8 +34,29 @@ public class ItemFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null) {
+        setItem(savedInstanceState);
+    }
+
+    /**
+     * Set item from savedInstanceState or fragment args
+     * @param savedInstanceState
+     */
+    private void setItem(Bundle savedInstanceState) {
+        if(savedInstanceState != null && savedInstanceState.getParcelable(ITEM) != null) {
+            item = (Item) savedInstanceState.get(ITEM);
+        }
+        else if(getArguments() != null) {
             item = getArguments().getParcelable(ITEM);
+        } else {
+            item = null;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(item != null) {
+            outState.putParcelable(ITEM, item);
         }
     }
 
@@ -56,24 +80,37 @@ public class ItemFragment extends Fragment {
 
     private void setItemData() {
         textViewTitle.setText(item.getTitle());
-        textViewPrice.setText(item.getValue());
-        textViewDescription.setText(item.getDescription().getFrCA());
+        textViewPrice.setText(getContext().getString(R.string.price_tag, item.getValue(), item.getCurrency()));
+        String description = getDescriptionByDeviceLocale(item.getDescription());
+        textViewDescription.setText(description);
     }
 
-    private void setItem(Item item) {
-        this.item = item;
-
+    /**
+     * Check device language to display the appropriate description
+     * @param description object
+     * @return french description if the device is set to "fr-CA" if not return the default
+     * value "en-CA"
+     */
+    private String getDescriptionByDeviceLocale(Description description) {
+        if(description == null) return null;
+        String descriptionText = null;
+        String deviceLanguageTag = Locale.getDefault().toLanguageTag();
+        if(deviceLanguageTag.equals("fr-CA"))
+            descriptionText = description.getFrCA();
+        else
+            descriptionText = description.getEnCA();
+        return descriptionText;
     }
 
     public void updateItem(Item item) {
         // Showing loading while setting item data
         showLoading();
-        // Setting data from the item object we got from the parent activity
-        setItem(item);
-        // Populating data to the views
-        setItemData();
-        // Hiding the loading view once it is all done
-        hideLoading();
+        if(item != null) {
+            // Populating data to the views
+            setItemData();
+            // Hiding the loading view once it is all done
+            hideLoading();
+        }
     }
 
     private void showLoading() {

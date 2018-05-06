@@ -21,10 +21,16 @@ import com.ibm.mystore.ui.item.ItemsActivity;
 public class MainActivity extends BaseActivity
         implements MainContract.IMainView, NavigationView.OnNavigationItemSelectedListener {
 
+    private Bundle savedInstanceState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Setting the saved instance state
+        this.savedInstanceState = savedInstanceState;
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -90,5 +96,10 @@ public class MainActivity extends BaseActivity
     private void startItemListActivity() {
         Intent itemsActivity = new Intent(this, ItemsActivity.class);
         startActivity(itemsActivity);
+    }
+
+    @Override
+    public Bundle getSavedInstanceState() {
+        return savedInstanceState;
     }
 }

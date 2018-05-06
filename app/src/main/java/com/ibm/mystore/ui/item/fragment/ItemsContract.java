@@ -4,6 +4,7 @@ import com.ibm.mystore.data.network.model.Item;
 import com.ibm.mystore.di.component.ItemComponent;
 import com.ibm.mystore.ui.base.BaseContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class ItemsContract {
     public interface IItemsView extends BaseContract.IMvpView {
         void showLoading();
         void hideLoading();
-        void setItems(List<Item> items);
+        void setItems(ArrayList<Item> items);
     }
 
 }

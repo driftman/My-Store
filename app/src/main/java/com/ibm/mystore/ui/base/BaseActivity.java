@@ -30,4 +30,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
         Toast.makeText(getApplicationContext(), TAG + ": " + msg, Toast.LENGTH_LONG)
                 .show();
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
 }

@@ -8,5 +8,8 @@ import com.ibm.mystore.data.network.model.Item;
 
 public interface OnItemSelectedListener {
 
-    void onItemSelected(Item item, int position);
+    void onItemSelected(Item item);
+
+    void displayFirstItemForLandscapeAndLargeDevice(Item item);
+
 }

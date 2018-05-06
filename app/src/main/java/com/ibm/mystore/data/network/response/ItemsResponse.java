@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 import com.ibm.mystore.data.network.model.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,21 @@ import java.util.List;
 public class ItemsResponse implements Parcelable {
 
     @SerializedName("data")
-    private List<Item> data;
+    private ArrayList<Item> data;
 
 
     protected ItemsResponse(Parcel in) {
         data = in.createTypedArrayList(Item.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(data);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ItemsResponse> CREATOR = new Creator<ItemsResponse>() {
@@ -34,17 +45,9 @@ public class ItemsResponse implements Parcelable {
         }
     };
 
-    public List<Item> getData() {
+    public ArrayList<Item> getData() {
         return data;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeTypedList(data);
-    }
 }
