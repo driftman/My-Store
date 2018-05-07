@@ -21,13 +21,11 @@ import retrofit2.Retrofit;
 @Module
 public class ItemModule {
 
-    @Provides @ItemsScope
-    public ItemService provideUserService(Retrofit retrofit) {
+    @Provides @ItemsScope ItemService provideUserService(Retrofit retrofit) {
         return new ItemService(retrofit.create(RestApi.class));
     }
 
-    @Provides @ItemsScope
-    ItemsContract.IItemsPresenter provideMainPresenter(ItemService service) {
+    @Provides @ItemsScope ItemsContract.IItemsPresenter provideMainPresenter(ItemService service) {
         return new ItemsPresenter(service);
     }
 
